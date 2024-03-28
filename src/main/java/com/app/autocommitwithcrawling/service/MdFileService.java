@@ -1,6 +1,8 @@
 package com.app.autocommitwithcrawling.service;
 
 import com.app.autocommitwithcrawling.domain.entity.CodingSolution;
+import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -9,7 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 @Service
+@RequiredArgsConstructor
 public class MdFileService {
+    private final FlexmarkHtmlConverter flexmarkHtmlConverter;
     private final String FILE_EXTENSION = ".md";
     private final String TEMPLATE = """
             # %d. %s(%s)
@@ -36,7 +40,7 @@ public class MdFileService {
         if(!dir.exists()){
             dir.mkdirs();
         }
-        String fileName = solution.getProblemNumber()+"_"+solution.getProblemTitle()+FILE_EXTENSION;
+        String fileName = solution.getProblemNumber()+"_"+solution.getProblemTitle().replaceAll(" ","_")+FILE_EXTENSION;
         File mdFile = new File(dir,fileName);
         mdFile.createNewFile();
         return mdFile;
@@ -46,7 +50,7 @@ public class MdFileService {
         return String.format(TEMPLATE,solution.getProblemNumber()
                 ,solution.getProblemTitle(),solution.getProblemLevel(),
                 solution.getProblemLink(),
-                solution.getProblemContent(),
+                flexmarkHtmlConverter.convert(solution.getProblemContent()),
                 solution.getSolutionCode());
     }
 

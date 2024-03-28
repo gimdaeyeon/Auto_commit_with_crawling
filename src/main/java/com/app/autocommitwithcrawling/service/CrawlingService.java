@@ -44,7 +44,7 @@ public class CrawlingService {
 
         String content = webDriverWait.until(
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector(".markdown.solarized-dark"))
-        ).getText();
+        ).getAttribute("outerHTML");
 
         String level = "Lv" + webDriverWait.until(
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector(".lesson-content"))
