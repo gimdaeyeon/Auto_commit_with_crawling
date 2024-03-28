@@ -20,7 +20,6 @@ public class CrawlingSchedule {
     @Scheduled(fixedDelay = 100000)
     public void scheduleTest(){
         CodingSolution codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
-        codingSolutionRepository.save(codingSolution);
     }
 
 

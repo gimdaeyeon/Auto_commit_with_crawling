@@ -58,14 +58,14 @@ public class CrawlingService {
         driver.close();
         driver.quit();  //브라우저를 닫는 메소드
 
-        return CodingSolution.builder()
+        return codingSolutionRepository.save(CodingSolution.builder()
                 .problemNumber(problemNumber)
                 .problemTitle(title)
                 .problemContent(content)
                 .site(Site.PROGRAMMERS)
                 .problemLink(solutionUrl)
                 .solutionCode(solutionCode)
-                .build();
+                .build());
     }
 
     private int findTargetProblemNumber() {
@@ -116,13 +116,9 @@ public class CrawlingService {
     private void programmersLogin() {
         String loginUrl = "https://programmers.co.kr/account/sign_in";
         driver.get(loginUrl);
-        try {
-            webDriverWait.until(
-                    ExpectedConditions.presenceOfElementLocated(By.cssSelector(".G7QZ1shWGosDZ1csHsNt .FymRFM681OjzOdzor5nk"))
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        webDriverWait.until(
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector(".G7QZ1shWGosDZ1csHsNt .FymRFM681OjzOdzor5nk"))
+        );
 
         WebElement idInput = driver.findElement(By.cssSelector("input[type='email'].FymRFM681OjzOdzor5nk"));
         keyBoardInput(idInput, programmersId);
