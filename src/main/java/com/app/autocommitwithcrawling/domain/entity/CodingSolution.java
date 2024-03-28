@@ -23,9 +23,10 @@ public class CodingSolution extends Period {
     @Column(length = 3000)
     private String solutionCode;
     private String problemLink;
+    private String problemLevel;
 
     @Builder
-    public CodingSolution(Long id, Site site, Integer problemNumber, String problemTitle, String problemContent, String solutionCode, String problemLink) {
+    public CodingSolution(Long id, Site site, Integer problemNumber, String problemTitle, String problemContent, String solutionCode, String problemLink, String problemLevel) {
         this.id = id;
         this.site = site;
         this.problemNumber = problemNumber;
@@ -33,6 +34,7 @@ public class CodingSolution extends Period {
         this.problemContent = problemContent;
         this.solutionCode = solutionCode;
         this.problemLink = problemLink;
+        this.problemLevel = problemLevel;
     }
 }
 

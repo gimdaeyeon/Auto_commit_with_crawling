@@ -46,6 +46,9 @@ public class CrawlingService {
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector(".markdown.solarized-dark"))
         ).getText();
 
+        String level = "Lv" + webDriverWait.until(
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector(".lesson-content"))
+        ).getAttribute("data-challenge-level");
 
         driver.get(mySolutionUrl);
 
@@ -65,6 +68,7 @@ public class CrawlingService {
                 .site(Site.PROGRAMMERS)
                 .problemLink(solutionUrl)
                 .solutionCode(solutionCode)
+                .problemLevel(level)
                 .build());
     }
 
