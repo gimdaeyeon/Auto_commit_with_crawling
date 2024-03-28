@@ -31,8 +31,7 @@ public class GitService {
     }
 
     private String createGitCommitMessage(CodingSolution solution){
-//        todo 기능 정상동작 확인하면 커밋메세지에서 Test: 부분 지우기
-        return"Test: "+ solution.getSite().name() +
+        return solution.getSite().name() +
                " - [" +
                solution.getProblemLevel() +
                "] " +
