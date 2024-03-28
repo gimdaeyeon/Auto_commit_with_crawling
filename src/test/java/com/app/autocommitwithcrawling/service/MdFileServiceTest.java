@@ -39,4 +39,11 @@ class MdFileServiceTest {
         File file = new File(f,"test.txt");
         file.createNewFile();
     }
+
+    @Test
+    void dirTest(){
+        System.out.println("----------------");
+        System.out.println(System.getProperty("user.dir"));
+        System.out.println("----------------");
+    }
 }
