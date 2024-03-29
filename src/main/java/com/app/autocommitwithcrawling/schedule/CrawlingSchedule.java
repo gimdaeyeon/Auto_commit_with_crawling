@@ -26,12 +26,11 @@ public class CrawlingSchedule {
     @Scheduled(fixedDelay = 100000)
     public void doScheduleProcess(){
         CodingSolution codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
-        try {
-            mdFileService.createAndWriteMdFile(codingSolution);
-        } catch (IOException e) {
-            codingSolutionRepository.delete(codingSolution);
-            doScheduleProcess();
-        }
+//        try {
+//            mdFileService.createAndWriteMdFile(codingSolution);
+//        } catch (IOException e) {
+//            codingSolutionRepository.delete(codingSolution);
+//        }
         gitService.gitCommitAndPush(codingSolution);
     }
 
