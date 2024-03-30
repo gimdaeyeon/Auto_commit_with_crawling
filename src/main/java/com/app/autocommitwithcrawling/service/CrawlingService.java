@@ -5,12 +5,14 @@ import com.app.autocommitwithcrawling.domain.type.Site;
 import com.app.autocommitwithcrawling.repository.CodingSolutionRepository;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchContextException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class CrawlingService {
     @Value("${programmers.password}")
     private String programmersPassword;
 
-    public CodingSolution fetchAndCrateSolutionFromProgrammers() {
+    public CodingSolution fetchAndCrateSolutionFromProgrammers() throws NoSuchContextException{
         programmersLogin();
         int problemNumber = findTargetProblemNumber();
 
@@ -61,7 +63,7 @@ public class CrawlingService {
         driver.close();
         driver.quit();  //브라우저를 닫는 메소드
 
-        return codingSolutionRepository.save(CodingSolution.builder()
+        return CodingSolution.builder()
                 .problemNumber(problemNumber)
                 .problemTitle(title)
                 .problemContent(content)
@@ -69,10 +71,10 @@ public class CrawlingService {
                 .problemLink(solutionUrl)
                 .solutionCode(solutionCode)
                 .problemLevel(level)
-                .build());
+                .build();
     }
 
-    private int findTargetProblemNumber() {
+    private int findTargetProblemNumber() throws NoSuchContextException{
         String problemListPageUrl = "https://school.programmers.co.kr/learn/challenges?order=recent&languages=java&page=1&statuses=solved";
         int problemNumber = 0;
         boolean existsed = true;
@@ -107,6 +109,10 @@ public class CrawlingService {
 //                db에 등록하지 않은 번호를 만나면 중단
                 if (!existsed) break;
             }
+            if("1".equals(driver.findElement(By.cssSelector("button.iGiYtR")).getText())){
+                throw new NoSuchContextException("제출한 모든 코딩테스트 문제가 등록되었습니다.");
+            }
+
 //            등록하지 않은 문제를 만나지 못했을 때만 다음 페이지로 이동
             if (existsed) {
                 driver.findElement(By.cssSelector("button.drGwOp.prev")).click();

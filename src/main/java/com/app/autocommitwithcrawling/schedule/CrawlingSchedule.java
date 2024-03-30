@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Component
 @Slf4j
@@ -24,14 +27,23 @@ public class CrawlingSchedule {
     private final GitService gitService;
 
     @Scheduled(fixedDelay = 100000)
-    public void doScheduleProcess(){
-        CodingSolution codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
-//        try {
-//            mdFileService.createAndWriteMdFile(codingSolution);
-//        } catch (IOException e) {
-//            codingSolutionRepository.delete(codingSolution);
-//        }
-        gitService.gitCommitAndPush(codingSolution);
+    public void doScheduleProcess() {
+//        각 해당 날짜에 이미 등록된 정보가 있으면 실행x
+        LocalDateTime today = LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0));
+        if(codingSolutionRepository.existsByCreatedDateAfter(today)){
+            return ;
+        }
+
+        CodingSolution codingSolution = null;
+        try {
+            codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
+            mdFileService.createAndWriteMdFile(codingSolution);
+//        커밋, 푸쉬하는 부분 잠시 주석
+//            gitService.gitCommitAndPush(codingSolution);
+            codingSolutionRepository.save(codingSolution);
+        } catch (IOException e) {
+
+        }
     }
 
 

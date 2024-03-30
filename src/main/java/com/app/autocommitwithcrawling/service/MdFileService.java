@@ -33,6 +33,7 @@ public class MdFileService {
             String fileContent = formatSolutionMarkdown(codingSolution);
             bw.write(fileContent);
         }
+
     }
 
     private File createFile(CodingSolution solution) throws IOException {
