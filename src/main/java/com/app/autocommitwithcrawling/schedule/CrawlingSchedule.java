@@ -39,10 +39,10 @@ public class CrawlingSchedule {
             codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
             mdFileService.createAndWriteMdFile(codingSolution);
 //        커밋, 푸쉬하는 부분 잠시 주석
-//            gitService.gitCommitAndPush(codingSolution);
+            gitService.gitCommitAndPush(codingSolution);
             codingSolutionRepository.save(codingSolution);
-        } catch (IOException e) {
-
+        } catch (Exception e) {
+//            프로세스중 오류가 났을 경우 오류메세지 보내기
         }
     }
 

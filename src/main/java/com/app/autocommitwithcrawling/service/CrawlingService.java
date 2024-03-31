@@ -58,8 +58,6 @@ public class CrawlingService {
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector(".highlight .rouge-code"))
         ).getText();
 
-        System.out.println("solutionCode = " + solutionCode);
-
         driver.close();
         driver.quit();  //브라우저를 닫는 메소드
 
