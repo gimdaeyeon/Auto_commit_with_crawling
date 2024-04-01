@@ -3,6 +3,7 @@ package com.app.autocommitwithcrawling.service;
 import com.app.autocommitwithcrawling.domain.entity.CodingSolution;
 import com.app.autocommitwithcrawling.domain.type.Site;
 import com.app.autocommitwithcrawling.repository.CodingSolutionRepository;
+import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchContextException;
@@ -23,6 +24,7 @@ public class CrawlingService {
     private final WebDriver driver;
     private final WebDriverWait webDriverWait;
     private final CodingSolutionRepository codingSolutionRepository;
+    private final FlexmarkHtmlConverter flexmarkHtmlConverter;
 
     @Value("${programmers.id}")
     private String programmersId;
@@ -64,7 +66,7 @@ public class CrawlingService {
         return CodingSolution.builder()
                 .problemNumber(problemNumber)
                 .problemTitle(title)
-                .problemContent(content)
+                .problemContent(flexmarkHtmlConverter.convert(content))
                 .site(Site.PROGRAMMERS)
                 .problemLink(solutionUrl)
                 .solutionCode(solutionCode)

@@ -4,9 +4,12 @@ import com.app.autocommitwithcrawling.domain.entity.CodingSolution;
 import com.app.autocommitwithcrawling.repository.CodingSolutionRepository;
 import com.app.autocommitwithcrawling.service.CrawlingService;
 import com.app.autocommitwithcrawling.service.GitService;
+import com.app.autocommitwithcrawling.service.MailService;
 import com.app.autocommitwithcrawling.service.MdFileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,10 @@ public class CrawlingSchedule {
     private final MdFileService mdFileService;
     private final CodingSolutionRepository codingSolutionRepository;
     private final GitService gitService;
+    private final MailService mailService;
+    @Value("${programmers.id}")
+    private String accountEmail;
+    private final WebDriver driver;
 
     @Scheduled(fixedDelay = 100000)
     public void doScheduleProcess() {
@@ -42,7 +49,10 @@ public class CrawlingSchedule {
             gitService.gitCommitAndPush(codingSolution);
             codingSolutionRepository.save(codingSolution);
         } catch (Exception e) {
-//            프로세스중 오류가 났을 경우 오류메세지 보내기
+            mailService.sendEmail(accountEmail,"자동 커밋프로세스 오류",e.getMessage());
+        }finally {
+            driver.close();
+            driver.quit();
         }
     }
 
