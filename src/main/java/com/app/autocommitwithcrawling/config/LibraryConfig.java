@@ -20,7 +20,7 @@ public class LibraryConfig {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");   //원격 연결 허용
         options.addArguments("--disable-popup-blocking");       //팝업안띄움
-//        options.addArguments("headless");                       //브라우저 안띄움
+        options.addArguments("headless");                       //브라우저 안띄움
         options.addArguments("--disable-gpu");         //gpu 비활성화
         options.addArguments("--blink-settings=imagesEnabled=false"); //이미지 다운 안받음
         return new ChromeDriver(options);

@@ -33,7 +33,7 @@ public class CrawlingSchedule {
     private String accountEmail;
     private final WebDriver driver;
 
-    @Scheduled(fixedDelay = 100000)
+    @Scheduled(cron = "0 0 2,14 * * *",zone = "Asia/Seoul")
     public void doScheduleProcess() {
 //        각 해당 날짜에 이미 등록된 정보가 있으면 실행x
         LocalDateTime today = LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0));
