@@ -51,10 +51,6 @@ public class CrawlingSchedule {
             codingSolutionRepository.save(codingSolution);
         } catch (Exception e) {
             mailService.sendEmail(accountEmail,"자동 커밋프로세스 오류",e.getMessage());
-        }finally {
-            driver.
-            driver.close();
-            driver.quit();
         }
     }
 
