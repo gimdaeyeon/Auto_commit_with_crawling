@@ -30,7 +30,7 @@ public class CrawlingSchedule {
     private String accountEmail;
     private final WebDriver driver;
 
-    //    @Scheduled(cron = "0 0 2,14 * * *",zone = "Asia/Seoul")
+//    @Scheduled(cron = "0 0 2,14 * * *",zone = "Asia/Seoul")
     @Scheduled(fixedDelay = 10000)
     public void doScheduleProcess() {
 //        각 해당 날짜에 이미 등록된 정보가 있으면 실행x
