@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Component
-@Slf4j
 @RequiredArgsConstructor
 @Transactional
 public class CrawlingSchedule {
