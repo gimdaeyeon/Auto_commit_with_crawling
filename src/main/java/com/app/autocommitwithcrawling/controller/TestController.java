@@ -4,8 +4,6 @@ import com.app.autocommitwithcrawling.domain.entity.CodingSolution;
 import com.app.autocommitwithcrawling.repository.CodingSolutionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -14,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestController {
     private final CodingSolutionRepository codingSolutionRepository;
+
     @GetMapping("/list")
     public List<CodingSolution> codingSolutionList() {
         return codingSolutionRepository.findAll();

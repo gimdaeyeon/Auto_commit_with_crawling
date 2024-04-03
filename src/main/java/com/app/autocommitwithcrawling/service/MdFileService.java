@@ -30,25 +30,25 @@ public class MdFileService {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
             String fileContent = formatSolutionMarkdown(codingSolution);
             bw.write(fileContent);
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new IOException("파일 등록에 실패했습니다.");
         }
     }
 
     private File createFile(CodingSolution solution) throws IOException {
-        File dir = new File(solution.getSite().name().toLowerCase()+File.separator+solution.getProblemLevel());
-        if(!dir.exists()){
+        File dir = new File(solution.getSite().name().toLowerCase() + File.separator + solution.getProblemLevel());
+        if (!dir.exists()) {
             dir.mkdirs();
         }
-        String fileName = solution.getProblemNumber()+"_"+solution.getProblemTitle().replaceAll(" ","_")+FILE_EXTENSION;
-        File mdFile = new File(dir,fileName);
+        String fileName = solution.getProblemNumber() + "_" + solution.getProblemTitle().replaceAll(" ", "_") + FILE_EXTENSION;
+        File mdFile = new File(dir, fileName);
         mdFile.createNewFile();
         return mdFile;
     }
 
-    private String formatSolutionMarkdown(CodingSolution solution){
-        return String.format(TEMPLATE,solution.getProblemNumber()
-                ,solution.getProblemTitle(),solution.getProblemLevel(),
+    private String formatSolutionMarkdown(CodingSolution solution) {
+        return String.format(TEMPLATE, solution.getProblemNumber()
+                , solution.getProblemTitle(), solution.getProblemLevel(),
                 solution.getProblemLink(),
                 solution.getProblemContent(),
                 solution.getSolutionCode());

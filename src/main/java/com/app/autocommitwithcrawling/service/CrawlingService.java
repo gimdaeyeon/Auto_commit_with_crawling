@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class CrawlingService {
     @Value("${programmers.password}")
     private String programmersPassword;
 
-    public CodingSolution fetchAndCrateSolutionFromProgrammers() throws NoSuchContextException{
+    public CodingSolution fetchAndCrateSolutionFromProgrammers() throws NoSuchContextException {
         programmersLogin();
         int problemNumber = findTargetProblemNumber();
 
@@ -74,7 +73,7 @@ public class CrawlingService {
                 .build();
     }
 
-    private int findTargetProblemNumber() throws NoSuchContextException{
+    private int findTargetProblemNumber() throws NoSuchContextException {
         String problemListPageUrl = "https://school.programmers.co.kr/learn/challenges?order=recent&languages=java&page=1&statuses=solved";
         int problemNumber = 0;
         boolean existsed = true;
@@ -109,7 +108,7 @@ public class CrawlingService {
 //                db에 등록하지 않은 번호를 만나면 중단
                 if (!existsed) break;
             }
-            if("1".equals(driver.findElement(By.cssSelector("button.iGiYtR")).getText())){
+            if ("1".equals(driver.findElement(By.cssSelector("button.iGiYtR")).getText())) {
                 throw new NoSuchContextException("제출한 모든 코딩테스트 문제가 등록되었습니다.");
             }
 

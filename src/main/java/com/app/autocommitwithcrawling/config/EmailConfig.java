@@ -41,7 +41,7 @@ public class EmailConfig {
     private int writeTimeout;
 
     @Bean
-    public JavaMailSender javaMailSender(){
+    public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
         mailSender.setPort(port);
@@ -53,14 +53,14 @@ public class EmailConfig {
     }
 
 
-    private Properties getMailProperties(){
+    private Properties getMailProperties() {
         Properties properties = new Properties();
-        properties.put("mail.smtp.auth",auth);
-        properties.put("mail.smtp.starttls.enable",starttlsEnable);
-        properties.put("mail.smtp.starttls.required",starttlsRequired);
-        properties.put("mail.smtp.connectionTimeout",connectionTimeout);
-        properties.put("mail.smtp.timeout",timeout);
-        properties.put("mail.smtp.writeTimeout",writeTimeout);
+        properties.put("mail.smtp.auth", auth);
+        properties.put("mail.smtp.starttls.enable", starttlsEnable);
+        properties.put("mail.smtp.starttls.required", starttlsRequired);
+        properties.put("mail.smtp.connectionTimeout", connectionTimeout);
+        properties.put("mail.smtp.timeout", timeout);
+        properties.put("mail.smtp.writeTimeout", writeTimeout);
         return properties;
     }
 }

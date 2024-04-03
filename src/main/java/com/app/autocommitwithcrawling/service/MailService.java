@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class MailService {
     private final JavaMailSender mailSender;
 
-    public void sendEmail(String toEmail,String title, String text){
-        SimpleMailMessage emailForm = createEmailForm(toEmail,title,text);
+    public void sendEmail(String toEmail, String title, String text) {
+        SimpleMailMessage emailForm = createEmailForm(toEmail, title, text);
 
         try {
             mailSender.send(emailForm);
@@ -28,8 +28,8 @@ public class MailService {
     //    발신할 이메일 데이터 세팅
     private SimpleMailMessage createEmailForm(String toEmail,
                                               String title,
-                                              String text){
-        SimpleMailMessage  message = new SimpleMailMessage();
+                                              String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
         message.setSubject(title);
         message.setText(text);
