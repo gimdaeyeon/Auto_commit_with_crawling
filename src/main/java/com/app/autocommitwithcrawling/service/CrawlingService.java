@@ -60,7 +60,7 @@ public class CrawlingService {
         ).getText();
 
         driver.close();
-        driver.quit();  //브라우저를 닫는 메소드
+//        driver.quit();  //브라우저를 닫는 메소드
 
         return CodingSolution.builder()
                 .problemNumber(problemNumber)
