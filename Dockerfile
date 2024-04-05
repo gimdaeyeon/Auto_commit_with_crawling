@@ -7,8 +7,8 @@ RUN ./gradlew bootJar
 
 FROM openjdk:17-slim-bullseye
 WORKDIR /app
-COPY --from=builder /app/build/libs/auto_commit_with_crawling-*.jar app.jar
+COPY --from=builder /app/build/libs/autoCommitWithCrawling-0.0.1-SNAPSHOT.jar app.jar
 
 ENV PROFILE="dev"
+ENV TZ=Asia/Seoul
 ENTRYPOINT java -jar app.jar --spring.profiles.active=$PROFILE
-

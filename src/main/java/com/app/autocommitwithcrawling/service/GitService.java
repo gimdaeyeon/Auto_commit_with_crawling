@@ -19,6 +19,7 @@ public class GitService {
 
     public void gitCommitAndPush(CodingSolution solution) {
         try (Git git = Git.open(gitDir)) {
+
             git.add().addFilepattern(".").call();
             git.commit().setMessage(createGitCommitMessage(solution)).call();
             git.push()
