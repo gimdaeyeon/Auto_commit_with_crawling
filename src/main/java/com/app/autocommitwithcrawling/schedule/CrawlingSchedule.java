@@ -7,6 +7,7 @@ import com.app.autocommitwithcrawling.service.GitService;
 import com.app.autocommitwithcrawling.service.MailService;
 import com.app.autocommitwithcrawling.service.MdFileService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -28,7 +30,6 @@ public class CrawlingSchedule {
     private final MailService mailService;
     @Value("${programmers.id}")
     private String accountEmail;
-    private final WebDriver driver;
 
 //    @Scheduled(cron = "0 0 2,14 * * *",zone = "Asia/Seoul")
     @Scheduled(fixedDelay = 100000)
@@ -42,6 +43,7 @@ public class CrawlingSchedule {
         CodingSolution codingSolution = null;
         try {
             codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
+            log.info("codingSolution : {}", codingSolution);
             mdFileService.createAndWriteMdFile(codingSolution);
 //        커밋, 푸쉬하는 부분 잠시 주석
             gitService.gitCommitAndPush(codingSolution);
