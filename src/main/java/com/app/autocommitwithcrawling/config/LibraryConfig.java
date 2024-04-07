@@ -14,8 +14,8 @@ import java.time.Duration;
 
 @Configuration
 public class LibraryConfig {
-    @Value("${chrome.driver}")
-    String driverPath;
+//    @Value("${chrome.driver}")
+//    String driverPath;
 
     @Bean
     public WebDriver webDriver() {
