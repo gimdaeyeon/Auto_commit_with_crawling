@@ -3,7 +3,6 @@ package com.app.autocommitwithcrawling.service;
 import com.app.autocommitwithcrawling.domain.entity.CodingSolution;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.RemoteAddCommand;
 import org.eclipse.jgit.api.RenameBranchCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.RefSpec;
@@ -29,12 +28,11 @@ public class GitService {
         this.credentialsProvider = credentialsProvider;
         this.GIT_DIR = new File(System.getProperty("user.dir"));
         if (!isGitRepoDir()) {
-            RemoteAddCommand remoteAddCommand;
             try (Git git = Git.init().setDirectory(GIT_DIR).call()) {
-                remoteAddCommand = git.remoteAdd();
-                remoteAddCommand.setName(ORIGIN);
-                remoteAddCommand.setUri(new URIish(gitRepoUri));
-                remoteAddCommand.call();
+                git.remoteAdd()
+                        .setName(ORIGIN)
+                        .setUri(new URIish(gitRepoUri))
+                        .call();
 
                 git.add().addFilepattern(".").call();
                 git.commit().setMessage("Init: 초기 컨테이너 가동").call();
