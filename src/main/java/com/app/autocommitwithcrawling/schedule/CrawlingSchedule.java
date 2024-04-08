@@ -8,7 +8,6 @@ import com.app.autocommitwithcrawling.service.MailService;
 import com.app.autocommitwithcrawling.service.MdFileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -45,7 +44,6 @@ public class CrawlingSchedule {
             codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
             log.info("codingSolution : {}", codingSolution);
             mdFileService.createAndWriteMdFile(codingSolution);
-//        커밋, 푸쉬하는 부분 잠시 주석
             gitService.gitCommitAndPush(codingSolution);
             codingSolutionRepository.save(codingSolution);
         } catch (Exception e) {

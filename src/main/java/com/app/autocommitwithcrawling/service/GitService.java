@@ -16,7 +16,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class GitService {
-    private final File gitDir = new File(System.getProperty("user.dir"));
+    private final File GIT_DIR = new File(System.getProperty("user.dir"));
     private final UsernamePasswordCredentialsProvider credentialsProvider;
 
 //    todo 해당 프로젝트가 실행될 때 git 프로젝트로 등록하기
@@ -28,7 +28,7 @@ public class GitService {
 
 
     public void gitCommitAndPush(CodingSolution solution) {
-        try (Git git = Git.open(gitDir)) {
+        try (Git git = Git.open(GIT_DIR)) {
 
             git.add().addFilepattern(".").call();
             git.commit().setMessage(createGitCommitMessage(solution)).call();
