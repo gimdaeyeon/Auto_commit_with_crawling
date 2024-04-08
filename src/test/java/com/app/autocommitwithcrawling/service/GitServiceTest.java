@@ -1,5 +1,7 @@
 package com.app.autocommitwithcrawling.service;
 
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.RenameBranchCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.junit.jupiter.api.DisplayName;
@@ -53,6 +55,18 @@ class GitServiceTest {
             e.printStackTrace();
             System.out.println("저장소를 찾거나 구성하는 중 에러가 발생했습니다.");
         }
+    }
+
+    @Test
+    @DisplayName("git브랜치 이름 변경 테스트")
+    void gitBranchNameTest() throws Exception {
+        Git git = Git.open(new File(System.getProperty("user.dir")));
+
+        RenameBranchCommand renameBranchCommand = git.branchRename();
+        String oldBranchName = renameBranchCommand.getRepository().getBranch();
+        renameBranchCommand.setOldName(oldBranchName);
+        renameBranchCommand.setNewName("main");
+        renameBranchCommand.call();
     }
 
 }
