@@ -36,11 +36,17 @@ public class GitService {
                 remoteAddCommand.setUri(new URIish(gitRepoUri));
                 remoteAddCommand.call();
 
+                git.add().addFilepattern(".").call();
+                git.commit().setMessage("Init: 초기 컨테이너 가동").call();
+
                 RenameBranchCommand renameBranchCommand = git.branchRename();
                 String oldBranchName = renameBranchCommand.getRepository().getBranch();
-                renameBranchCommand.setOldName(oldBranchName);
-                renameBranchCommand.setNewName(MAIN);
-                renameBranchCommand.call();
+                if (!MAIN.equals(oldBranchName)) {
+                    renameBranchCommand
+                            .setOldName(oldBranchName)
+                            .setNewName(MAIN)
+                            .call();
+                }
             } catch (GitAPIException | URISyntaxException | IOException e) {
                 throw new RuntimeException(e.getMessage());
             }

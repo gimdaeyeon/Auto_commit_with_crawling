@@ -23,4 +23,4 @@ RUN apt-get -y install google-chrome-stable
 ENV PROFILE="dev"
 ENV TZ=Asia/Seoul
 ENTRYPOINT java -jar app.jar
-#ENTRYPOINT java -jar app.jar --spring.profiles.active=$PROFILE
+#ENTRYPOINT java -jar app.jar --spring.profiles.active=$PROFI
