@@ -74,7 +74,7 @@ public class GitService {
     private String createGitCommitMessage(CodingSolution solution) {
 //        커밋 메세지 형식 : {사이트} - [{난이도}] {문제 제목}({문제 번호}번) 등록
 //                    예 : PROGRAMMERS - [Lv1] 가운데 글자 가져오기(12903번) 등록
-        return solution.getSite().name() +
+        return "Test: "+ solution.getSite().name() +
                " - [" +
                solution.getProblemLevel() +
                "] " +
