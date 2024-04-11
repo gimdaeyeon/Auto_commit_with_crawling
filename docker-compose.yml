@@ -1,0 +1,15 @@
+services:
+  oracle11g:
+    ports:
+      - "1523:1521"
+      - "9000:8080"
+    image: jaspeen/oracle-xe-11g
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+
+  autocommit:
+    depends_on:
+      - oracle11g
+    image: autocommit:0.0.1
+    ports:
+      - "8084:10005"
