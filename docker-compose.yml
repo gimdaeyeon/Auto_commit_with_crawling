@@ -1,15 +1,16 @@
 services:
-  oracle11g:
+  mysqldb:
     ports:
-      - "1523:1521"
-      - "9000:8080"
-    image: jaspeen/oracle-xe-11g
+      - "3301:3306"
+    image: mysql:latest
     environment:
-      - ORACLE_ALLOW_REMOTE=true
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=auto_commit
+      - MYSQL_USER=root
 
   autocommit:
     depends_on:
-      - oracle11g
-    image: autocommit:0.0.1
+      - mysqldb
+    image: autocommit:latest
     ports:
       - "8084:10005"

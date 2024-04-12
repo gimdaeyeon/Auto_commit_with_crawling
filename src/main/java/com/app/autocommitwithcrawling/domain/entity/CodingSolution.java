@@ -7,12 +7,12 @@ import lombok.*;
 
 @Entity
 @Table(name = "TBL_CODING_SOLUTION", indexes = @Index(name = "IDX_SOLUTION_SITE_AND_NUMBER", columnList = "problemNumber, site"))
-@SequenceGenerator(name = "SEQ_CODING_SOLUTION_GENERATOR", sequenceName = "SEQ_CODING_SOLUTION", allocationSize = 1)
+//@SequenceGenerator(name = "SEQ_CODING_SOLUTION_GENERATOR", sequenceName = "SEQ_CODING_SOLUTION", allocationSize = 1)
 @Getter @ToString(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CodingSolution extends Period {
     @Id
-    @GeneratedValue(generator = "SEQ_CODING_SOLUTION_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CODING_SOLUTION_ID")
     private Long id;
     @Enumerated(EnumType.STRING)
