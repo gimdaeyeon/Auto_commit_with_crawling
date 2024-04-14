@@ -8,7 +8,9 @@ import com.app.autocommitwithcrawling.service.MailService;
 import com.app.autocommitwithcrawling.service.MdFileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -41,6 +43,7 @@ public class CrawlingSchedule {
             return;
         }
 
+        loggingDriverVersion();
         CodingSolution codingSolution = null;
         try {
             codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
@@ -55,6 +58,14 @@ public class CrawlingSchedule {
             driver.close();
             driver.quit();  //브라우저를 닫는 메소드
         }
+    }
+
+    private void loggingDriverVersion() {
+        Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
+        String browserVersion = caps.getBrowserVersion();
+        String browserName = caps.getBrowserName();
+        log.info("browserVersion : {}", browserVersion);
+        log.info("browserName : {}", browserName);
     }
 
 
