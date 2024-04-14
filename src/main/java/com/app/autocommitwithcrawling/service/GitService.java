@@ -28,24 +28,15 @@ public class GitService {
         this.credentialsProvider = credentialsProvider;
         this.GIT_DIR = new File(System.getProperty("user.dir"));
         if (!isGitRepoDir()) {
-            try (Git git = Git.init().setDirectory(GIT_DIR).call()) {
+            try (Git git = Git.init()
+                    .setInitialBranch(MAIN)
+                    .setDirectory(GIT_DIR).call()) {
                 git.remoteAdd()
                         .setName(ORIGIN)
                         .setUri(new URIish(gitRepoUri))
                         .call();
 
-                git.add().addFilepattern(".").call();
-                git.commit().setMessage("Init: 초기 컨테이너 가동").call();
-
-                RenameBranchCommand renameBranchCommand = git.branchRename();
-                String oldBranchName = renameBranchCommand.getRepository().getBranch();
-                if (!MAIN.equals(oldBranchName)) {
-                    renameBranchCommand
-                            .setOldName(oldBranchName)
-                            .setNewName(MAIN)
-                            .call();
-                }
-            } catch (GitAPIException | URISyntaxException | IOException e) {
+            } catch (GitAPIException | URISyntaxException e) {
                 throw new RuntimeException(e.getMessage());
             }
         }
