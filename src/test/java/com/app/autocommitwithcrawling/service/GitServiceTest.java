@@ -72,15 +72,10 @@ class GitServiceTest {
     @Test
     @DisplayName("git init 테스트")
     void gitInitTest() throws Exception {
-//        Git git = Git.init().setDirectory(new File("C:\\gb_KDY\\test\\test")).call();
-        Git git = Git.open(new File("C:\\gb_KDY\\test\\test"));
-
-        RenameBranchCommand renameBranchCommand = git.branchRename();
-        String oldBranchName = renameBranchCommand.getRepository().getBranch();
-        renameBranchCommand
-                .setOldName(oldBranchName)
-                .setNewName("main")
+        Git git = Git.init().setDirectory(new File("C:\\gb_KDY\\test\\test"))
+                .setInitialBranch("main")
                 .call();
+
     }
 
 }

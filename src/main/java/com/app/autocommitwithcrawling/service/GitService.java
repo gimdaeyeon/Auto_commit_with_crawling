@@ -35,6 +35,10 @@ public class GitService {
                         .setName(ORIGIN)
                         .setUri(new URIish(gitRepoUri))
                         .call();
+                git.add().addFilepattern(".").call();
+                git.pull().setRemoteBranchName(MAIN)
+                        .setCredentialsProvider(credentialsProvider)
+                        .call();
 
             } catch (GitAPIException | URISyntaxException e) {
                 throw new RuntimeException(e.getMessage());
@@ -46,7 +50,7 @@ public class GitService {
     public void gitCommitAndPush(CodingSolution solution) {
         try (Git git = Git.open(GIT_DIR)) {
 
-            git.add().addFilepattern(".").call();
+            git.add().addFilepattern(solution.getSite().name().toLowerCase()+"/").call();
             git.commit().setMessage(createGitCommitMessage(solution)).call();
             git.pull().setRemoteBranchName(MAIN)
                     .setCredentialsProvider(credentialsProvider)
