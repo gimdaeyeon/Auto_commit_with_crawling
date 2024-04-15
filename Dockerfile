@@ -6,7 +6,6 @@ COPY src/main ./src/main
 RUN ./gradlew bootJar
 
 FROM openjdk:17-slim-bullseye
-WORKDIR /app
 COPY --from=builder /app/build/libs/autoCommitWithCrawling-0.0.1-SNAPSHOT.jar app.jar
 
 #docker chrom 설치
@@ -23,4 +22,4 @@ RUN apt-get -y install google-chrome-stable
 #ENV PROFILE="dev"
 ENV TZ=Asia/Seoul
 ENTRYPOINT java -jar app.jar
-#ENTRYPOINT java -jar app.jar --spring.profiles.active=$PROFI
+#ENTRYPOINT java -jar app.jar --springd.profiles.active=$PROFI

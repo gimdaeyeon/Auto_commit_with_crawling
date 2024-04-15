@@ -33,7 +33,7 @@ public class LibraryConfig {
 
     @Bean
     public WebDriverWait WebDriverWait() {
-        return new WebDriverWait(webDriver(), Duration.ofSeconds(10));
+        return new WebDriverWait(webDriver(), Duration.ofMinutes(1L));
     }
 
     @Bean
