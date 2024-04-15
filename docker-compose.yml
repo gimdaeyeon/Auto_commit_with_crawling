@@ -9,7 +9,6 @@ services:
   autocommit:
     depends_on:
       - mysqldb
-    build: .
     image: autocommit:0.0.1
     ports:
       - "8084:10005"
