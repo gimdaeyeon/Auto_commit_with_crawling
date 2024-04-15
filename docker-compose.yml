@@ -10,5 +10,8 @@ services:
     depends_on:
       - mysqldb
     image: autocommit:0.0.1
+    volumes:
+      - ./src:/app/src
     ports:
       - "8084:10005"
+    shm_size: '2gb'
