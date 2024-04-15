@@ -20,7 +20,7 @@ RUN apt-get update
 RUN apt-get -y install google-chrome-stable
 #docker chrom 설치 /
 
-ENV PROFILE="dev"
+#ENV PROFILE="dev"
 ENV TZ=Asia/Seoul
 ENTRYPOINT java -jar app.jar
 #ENTRYPOINT java -jar app.jar --spring.profiles.active=$PROFI
