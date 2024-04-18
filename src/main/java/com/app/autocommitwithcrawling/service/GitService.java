@@ -26,7 +26,9 @@ public class GitService {
     public GitService(UsernamePasswordCredentialsProvider credentialsProvider,
                       @Value("${git.repoUri}") String gitRepoUri) {
         this.credentialsProvider = credentialsProvider;
-        this.GIT_DIR = new File(System.getProperty("user.dir"));
+        String dirRoot = System.getProperty("user.dir");
+        log.info("dirRoot : {}", dirRoot);
+        this.GIT_DIR = new File(dirRoot);
         if (!isGitRepoDir()) {
             try (Git git = Git.init()
                     .setInitialBranch(MAIN)
