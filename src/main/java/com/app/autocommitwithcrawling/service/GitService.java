@@ -57,7 +57,7 @@ public class GitService {
     public void gitCommitAndPush(CodingSolution solution) {
         try (Git git = Git.open(GIT_DIR)) {
 
-            git.add().addFilepattern(solution.getSite().name().toLowerCase()+"/").call();
+            git.add().addFilepattern(".").call();
             git.commit().setMessage(createGitCommitMessage(solution)).call();
             git.pull().setRemoteBranchName(MAIN)
                     .setCredentialsProvider(credentialsProvider)

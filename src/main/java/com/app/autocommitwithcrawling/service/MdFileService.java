@@ -12,6 +12,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class MdFileService {
+    private final String SOLUTIONS_DIR = System.getProperty("user.dir")+"/solutions";
     private final String FILE_EXTENSION = ".md";
     private final String TEMPLATE = """
             # %d. %s(%s)
@@ -36,7 +37,7 @@ public class MdFileService {
     }
 
     private File createFile(CodingSolution solution) throws IOException {
-        File dir = new File(solution.getSite().name().toLowerCase() + File.separator + solution.getProblemLevel());
+        File dir = new File(SOLUTIONS_DIR,solution.getSite().name().toLowerCase() + File.separator + solution.getProblemLevel());
         if (!dir.exists()) {
             dir.mkdirs();
         }
