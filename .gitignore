@@ -41,3 +41,5 @@ application.yml
 
 ### generated Files ###
 /src/main/generated
+
+/solutions
