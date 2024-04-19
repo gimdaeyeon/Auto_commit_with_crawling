@@ -28,7 +28,12 @@ public class GitService {
         this.credentialsProvider = credentialsProvider;
         String dirRoot = System.getProperty("user.dir");
         log.info("dirRoot : {}", dirRoot);
-        this.GIT_DIR = new File(dirRoot);
+        this.GIT_DIR = new File(dirRoot+"/solutions");
+
+        if (!this.GIT_DIR.exists()) {
+            this.GIT_DIR.mkdirs();
+        }
+
         if (!isGitRepoDir()) {
             try (Git git = Git.init()
                     .setInitialBranch(MAIN)
@@ -83,8 +88,8 @@ public class GitService {
 
     private boolean isGitRepoDir() {
         try {
-            File currentDir = new File(".").getCanonicalFile(); // 현재 디렉토리의 정규 경로를 가져옵니다.
-            File gitDir = new File(currentDir, ".git"); // 현재 디렉토리 내의 .git 폴더를 찾습니다.
+            File targetDir = GIT_DIR.getCanonicalFile(); // 현재 디렉토리의 정규 경로를 가져옵니다.
+            File gitDir = new File(targetDir, ".git"); // 현재 디렉토리 내의 .git 폴더를 찾습니다.
             return gitDir.exists() && gitDir.isDirectory();
         } catch (IOException e) {
             log.error("{}", e.getMessage());

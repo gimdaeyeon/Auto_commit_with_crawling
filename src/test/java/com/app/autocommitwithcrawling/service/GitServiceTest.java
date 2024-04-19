@@ -38,7 +38,7 @@ class GitServiceTest {
     void gitRepoTest2() {
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
         try {
-            File currentDir = new File(".").getCanonicalFile(); // 현재 디렉토리의 정규 경로를 가져옵니다.
+            File currentDir = new File(System.getProperty("user.dir")+"/solutions").getCanonicalFile(); // 현재 디렉토리의 정규 경로를 가져옵니다.
             File gitDir = new File(currentDir, ".git"); // 현재 디렉토리 내의 .git 폴더를 찾습니다.
 
             if (gitDir.exists() && gitDir.isDirectory()) {

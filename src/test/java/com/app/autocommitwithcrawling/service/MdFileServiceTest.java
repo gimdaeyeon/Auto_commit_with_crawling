@@ -27,7 +27,8 @@ class MdFileServiceTest {
 
     @Test
     void fileTest() throws IOException {
-        File f = new File("programmers" + File.separator + "lv1");
+
+        File f = new File(System.getProperty("user.dir")+"/test");
         if (!f.exists()) {
             f.mkdirs();
         }
