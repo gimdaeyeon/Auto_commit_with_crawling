@@ -62,13 +62,11 @@ public class GitService {
 
     public void gitCommitAndPush(CodingSolution solution) {
         try (Git git = Git.open(GIT_DIR)) {
-            Repository repository = git.getRepository();
-            StoredConfig config = repository.getConfig();
+            StoredConfig config = git.getRepository().getConfig();
             config.setString("user", null, "name", userName);
             config.setString("user", null, "email", email);
             config.save();
 
-            git = new Git(repository);
             git.add().addFilepattern(".").call();
             git.commit()
                     .setCredentialsProvider(credentialsProvider)
@@ -102,8 +100,8 @@ public class GitService {
 
     private boolean isGitRepoDir() {
         try {
-            File targetDir = GIT_DIR.getCanonicalFile(); // 현재 디렉토리의 정규 경로를 가져옵니다.
-            File gitDir = new File(targetDir, ".git"); // 현재 디렉토리 내의 .git 폴더를 찾습니다.
+            File targetDir = GIT_DIR.getCanonicalFile(); // 현재 디렉토리의 정규 경로를 가져온다.
+            File gitDir = new File(targetDir, ".git"); // 현재 디렉토리 내의 .git 폴더를 찾는다다.
             return gitDir.exists() && gitDir.isDirectory();
         } catch (IOException e) {
             log.error("{}", e.getMessage());
