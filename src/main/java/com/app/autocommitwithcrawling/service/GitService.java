@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.RenameBranchCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
@@ -20,6 +22,10 @@ import java.net.URISyntaxException;
 public class GitService {
     private final File GIT_DIR;
     private final UsernamePasswordCredentialsProvider credentialsProvider;
+    @Value("${git.userName}")
+    private String userName;
+    @Value("${git.email}")
+    private String email;
     private final String MAIN = "main";
     private final String ORIGIN = "origin";
 
@@ -56,7 +62,13 @@ public class GitService {
 
     public void gitCommitAndPush(CodingSolution solution) {
         try (Git git = Git.open(GIT_DIR)) {
+            Repository repository = git.getRepository();
+            StoredConfig config = repository.getConfig();
+            config.setString("user", null, "name", userName);
+            config.setString("user", null, "email", email);
+            config.save();
 
+            git = new Git(repository);
             git.add().addFilepattern(".").call();
             git.commit()
                     .setCredentialsProvider(credentialsProvider)

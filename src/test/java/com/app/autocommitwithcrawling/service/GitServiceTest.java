@@ -4,6 +4,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.RenameBranchCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.SshSessionFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -76,7 +77,7 @@ class GitServiceTest {
                 .setInitialBranch("main")
                 .call();
 
-
+        SshSessionFactory instance = SshSessionFactory.getInstance();
 
 
 
