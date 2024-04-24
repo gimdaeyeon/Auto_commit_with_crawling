@@ -5,6 +5,7 @@ import com.app.autocommitwithcrawling.domain.type.Site;
 import com.app.autocommitwithcrawling.repository.CodingSolutionRepository;
 import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchContextException;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CrawlingService {
 
     private final WebDriver driver;
@@ -34,7 +36,7 @@ public class CrawlingService {
         programmersLogin();
         int problemNumber = findTargetProblemNumber();
 
-        System.out.println("problemNumber = " + problemNumber);
+        log.info("problemNumber : {}", problemNumber);
 
         String solutionUrl = "https://school.programmers.co.kr/learn/courses/30/lessons/" + problemNumber;
         String mySolutionUrl = solutionUrl + "/solution_groups?language=java&type=my";
@@ -122,11 +124,11 @@ public class CrawlingService {
     private void programmersLogin() {
         String loginUrl = "https://programmers.co.kr/account/sign_in";
         driver.get(loginUrl);
-        webDriverWait.until(
-                ExpectedConditions.presenceOfElementLocated(By.cssSelector(".G7QZ1shWGosDZ1csHsNt .FymRFM681OjzOdzor5nk"))
+
+        WebElement idInput = webDriverWait.until(
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[type='email'].FymRFM681OjzOdzor5nk"))
         );
 
-        WebElement idInput = driver.findElement(By.cssSelector("input[type='email'].FymRFM681OjzOdzor5nk"));
         keyBoardInput(idInput, programmersId);
 
         WebElement passwordInput = driver.findElement(By.cssSelector("input[type='password'].FymRFM681OjzOdzor5nk"));
@@ -136,7 +138,7 @@ public class CrawlingService {
         loginBtn.click();
 
         webDriverWait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.UtilMenustyle__ProfilePopupButton-sc-2sjysx-3.uHasJ"))
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.Gosd7zfsHAxk1MOYSkL1"))
         );
     }
 
