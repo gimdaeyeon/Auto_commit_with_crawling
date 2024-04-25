@@ -12,9 +12,10 @@ services:
       timeout: 5s
       retries: 5
   autocommit:
-    depends_on:
-      - mysqldb
     image: autocommit:0.0.1
+    depends_on:
+      mysqldb:
+        condition: service_healthy
     volumes:
       - ./src:/app/src
     ports:

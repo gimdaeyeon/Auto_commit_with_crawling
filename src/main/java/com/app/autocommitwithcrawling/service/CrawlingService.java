@@ -58,7 +58,7 @@ public class CrawlingService {
         driver.get(mySolutionUrl);
 
         String solutionCode = webDriverWait.until(
-                ExpectedConditions.presenceOfElementLocated(By.cssSelector(".highlight .rouge-code"))
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector(".highlight .rouge-table"))
         ).getText();
 
         return CodingSolution.builder()
@@ -74,12 +74,13 @@ public class CrawlingService {
 
     private int findTargetProblemNumber() throws NoSuchContextException {
         String problemListPageUrl = "https://school.programmers.co.kr/learn/challenges?order=recent&languages=java&page=1&statuses=solved";
+                            //       https://school.programmers.co.kr/learn/challenges?order=recent&page=1&statuses=solved
         int problemNumber = 0;
         boolean existsed = true;
         driver.get(problemListPageUrl);
 
         WebElement lastBtn = webDriverWait.until(
-                ExpectedConditions.presenceOfElementLocated(By.cssSelector("button.last"))
+                ExpectedConditions.elementToBeClickable(By.cssSelector("button.last"))
         );
         List<WebElement> earlyElements = webDriverWait.until(
                 ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("td.title"))
@@ -100,9 +101,10 @@ public class CrawlingService {
                 WebElement aTag = problemTd.findElement(By.cssSelector(".bookmark>a"));
                 String href = aTag.getAttribute("href");
                 problemNumber = Integer.parseInt(href.substring(href.lastIndexOf("/") + 1));
-                System.out.println(problemNumber);
+                log.info("problemNumber : {}", problemNumber);
                 existsed = codingSolutionRepository.existsByProblemNumberAndSite(problemNumber, Site.PROGRAMMERS);
-                System.out.println(href);
+                log.info("href : {}", href);
+
 
 //                db에 등록하지 않은 번호를 만나면 중단
                 if (!existsed) break;
@@ -134,11 +136,12 @@ public class CrawlingService {
         WebElement passwordInput = driver.findElement(By.cssSelector("input[type='password'].FymRFM681OjzOdzor5nk"));
         keyBoardInput(passwordInput, programmersPassword);
 
-        WebElement loginBtn = driver.findElement(By.cssSelector(".itAWTII94uCyf9uUgREi"));
+        WebElement loginBtn = driver.findElement(By.cssSelector("button.Gosd7zfsHAxk1MOYSkL1"));
         loginBtn.click();
 
+
         webDriverWait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.Gosd7zfsHAxk1MOYSkL1"))
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("button.uHasJ"))
         );
     }
 

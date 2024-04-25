@@ -43,7 +43,6 @@ public class CrawlingSchedule {
             return;
         }
 
-        loggingDriverVersion();
         CodingSolution codingSolution = null;
         try {
             codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
@@ -60,13 +59,6 @@ public class CrawlingSchedule {
         }
     }
 
-    private void loggingDriverVersion() {
-        Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
-        String browserVersion = caps.getBrowserVersion();
-        String browserName = caps.getBrowserName();
-        log.info("browserVersion : {}", browserVersion);
-        log.info("browserName : {}", browserName);
-    }
 
 
 }
