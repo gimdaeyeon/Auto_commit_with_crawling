@@ -33,7 +33,6 @@ public class GitService {
                       @Value("${git.repoUri}") String gitRepoUri) {
         this.credentialsProvider = credentialsProvider;
         String dirRoot = System.getProperty("user.dir");
-        log.info("dirRoot : {}", dirRoot);
         this.GIT_DIR = new File(dirRoot+"/solutions");
 
         if (!this.GIT_DIR.exists()) {

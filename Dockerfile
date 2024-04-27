@@ -22,7 +22,5 @@ RUN apt-get -y install google-chrome-stable
 #docker tree 설치
 RUN apt-get install tree
 
-#ENV PROFILE="dev"
 ENV TZ=Asia/Seoul
 ENTRYPOINT java -jar app.jar
-#ENTRYPOINT java -jar app.jar --springd.profiles.active=$PROFI

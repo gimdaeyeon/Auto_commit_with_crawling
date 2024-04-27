@@ -24,7 +24,7 @@ public class LibraryConfig {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");   //원격 연결 허용
         options.addArguments("--disable-popup-blocking");       //팝업안띄움
-//        options.addArguments("--headless=new");                       //브라우저 안띄움
+        options.addArguments("--headless=new");                       //브라우저 안띄움
         options.addArguments("--disable-gpu");         //gpu 비활성화
         options.addArguments("--no-sandbox"); //Linux에서 headless를 사용하는 경우 필요함.
         options.addArguments("--blink-settings=imagesEnabled=false"); //이미지 다운 안받음

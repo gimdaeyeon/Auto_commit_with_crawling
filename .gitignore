@@ -43,3 +43,5 @@ application.yml
 /src/main/generated
 
 /solutions
+
+.env
