@@ -3,9 +3,7 @@ package com.app.autocommitwithcrawling.service;
 import com.app.autocommitwithcrawling.domain.entity.CodingSolution;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.RenameBranchCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.URIish;
@@ -33,7 +31,7 @@ public class GitService {
                       @Value("${git.repoUri}") String gitRepoUri) {
         this.credentialsProvider = credentialsProvider;
         String dirRoot = System.getProperty("user.dir");
-        this.GIT_DIR = new File(dirRoot+"/solutions");
+        this.GIT_DIR = new File(dirRoot + "/solutions");
 
         if (!this.GIT_DIR.exists()) {
             this.GIT_DIR.mkdirs();
@@ -87,7 +85,7 @@ public class GitService {
     private String createGitCommitMessage(CodingSolution solution) {
 //        커밋 메세지 형식 : {사이트} - [{난이도}] {문제 제목}({문제 번호}번) 등록
 //                    예 : PROGRAMMERS - [Lv1] 가운데 글자 가져오기(12903번) 등록
-        return "Test: "+ solution.getSite().name() +
+        return "Test: " + solution.getSite().name() +
                " - [" +
                solution.getProblemLevel() +
                "] " +

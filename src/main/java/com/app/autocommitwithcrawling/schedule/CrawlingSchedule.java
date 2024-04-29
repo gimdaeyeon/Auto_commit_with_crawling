@@ -8,9 +8,7 @@ import com.app.autocommitwithcrawling.service.MailService;
 import com.app.autocommitwithcrawling.service.MdFileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -34,7 +32,7 @@ public class CrawlingSchedule {
     private String accountEmail;
     private final WebDriver driver;
 
-//    @Scheduled(cron = "0 0 2,14 * * *",zone = "Asia/Seoul")
+    //    @Scheduled(cron = "0 0 2,14 * * *",zone = "Asia/Seoul")
     @Scheduled(fixedDelay = 100000)
     public void doScheduleProcess() {
 //        각 해당 날짜에 이미 등록된 정보가 있으면 실행x
@@ -53,12 +51,11 @@ public class CrawlingSchedule {
         } catch (Exception e) {
             log.error(e.getMessage());
             mailService.sendEmail(accountEmail, "자동 커밋프로세스 오류", e.getMessage());
-        }finally {
+        } finally {
             driver.close();
             driver.quit();  //브라우저를 닫는 메소드
         }
     }
-
 
 
 }

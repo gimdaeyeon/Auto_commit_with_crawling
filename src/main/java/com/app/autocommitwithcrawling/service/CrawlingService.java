@@ -74,7 +74,7 @@ public class CrawlingService {
 
     private int findTargetProblemNumber() throws NoSuchContextException {
         String problemListPageUrl = "https://school.programmers.co.kr/learn/challenges?order=recent&languages=java&page=1&statuses=solved";
-                            //       https://school.programmers.co.kr/learn/challenges?order=recent&page=1&statuses=solved
+        //       https://school.programmers.co.kr/learn/challenges?order=recent&page=1&statuses=solved
         int problemNumber = 0;
         boolean existsed = true;
         driver.get(problemListPageUrl);
