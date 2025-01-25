@@ -52,7 +52,7 @@ public class MdFileService {
                 , solution.getProblemTitle(), solution.getProblemLevel(),
                 solution.getProblemLink(),
                 solution.getProblemContent(),
-                solution.getSolutionCode());
+                solution.getSolutionCode().trim());
     }
 
 

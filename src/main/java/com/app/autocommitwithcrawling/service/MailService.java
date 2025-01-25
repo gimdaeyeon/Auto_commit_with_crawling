@@ -22,7 +22,6 @@ public class MailService {
         } catch (MailException e) {
             throw new MailSendException(e.getMessage());
         }
-
     }
 
     //    발신할 이메일 데이터 세팅

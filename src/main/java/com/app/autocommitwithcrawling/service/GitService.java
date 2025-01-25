@@ -49,7 +49,6 @@ public class GitService {
                 git.pull().setRemoteBranchName(MAIN)
                         .setCredentialsProvider(credentialsProvider)
                         .call();
-
             } catch (GitAPIException | URISyntaxException e) {
                 throw new RuntimeException(e.getMessage());
             }

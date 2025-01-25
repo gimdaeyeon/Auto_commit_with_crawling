@@ -32,7 +32,7 @@ public class CrawlingSchedule {
     private String accountEmail;
     private final WebDriver driver;
 
-    //    @Scheduled(cron = "0 0 2,14 * * *",zone = "Asia/Seoul")
+//    @Scheduled(cron = "0 0 2,14 * * *", zone = "Asia/Seoul")
     @Scheduled(fixedDelay = 100000)
     public void doScheduleProcess() {
 //        각 해당 날짜에 이미 등록된 정보가 있으면 실행x
@@ -40,7 +40,7 @@ public class CrawlingSchedule {
         if (codingSolutionRepository.existsByCreatedDateAfter(today)) {
             return;
         }
-
+        
         CodingSolution codingSolution = null;
         try {
             codingSolution = crawlingService.fetchAndCrateSolutionFromProgrammers();
@@ -55,7 +55,11 @@ public class CrawlingSchedule {
             driver.close();
             driver.quit();  //브라우저를 닫는 메소드
         }
+
+
     }
+
+
 
 
 }
