@@ -41,8 +41,8 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
     // https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit JGit(java로 git명령어)
     implementation 'org.eclipse.jgit:org.eclipse.jgit:6.9.0.202403050737-r'
-    // https://mvnrepository.com/artifact/com.vladsch.flexmark/flexmark-all Flexmark(html->md)
-    implementation 'com.vladsch.flexmark:flexmark-all:0.64.8'
+    // https://mvnrepository.com/artifact/com.vladsch.flexmark/flexmark-html2md-converter
+    implementation 'com.vladsch.flexmark:flexmark-html2md-converter:0.64.8'
     // 메일인증
     implementation 'org.springframework.boot:spring-boot-starter-mail:3.2.2'
 
