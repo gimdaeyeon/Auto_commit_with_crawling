@@ -37,11 +37,11 @@ out/
 .vscode/
 
 ### yml ###
-application.yml
+application*.yml
 
 ### generated Files ###
 /src/main/generated
 
 /solutions
 
-.env
+.env*

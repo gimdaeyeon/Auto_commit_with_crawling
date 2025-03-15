@@ -41,7 +41,11 @@ public class MdFileService {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        String fileName = solution.getProblemNumber() + "_" + solution.getProblemTitle().replaceAll(" ", "_") + FILE_EXTENSION;
+        String solutionTitle = solution.getProblemTitle()
+                .replaceAll("[\\\\/:*?\"<>|]", "") // 파일명에 사용불가능한 특수문자 제거
+                .replaceAll(" ", "_");
+
+        String fileName = solution.getProblemNumber() + "_" + solutionTitle + FILE_EXTENSION;
         File mdFile = new File(dir, fileName);
         mdFile.createNewFile();
         return mdFile;

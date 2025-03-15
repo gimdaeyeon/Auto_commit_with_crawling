@@ -141,7 +141,8 @@ public class CrawlingService {
 
 
         webDriverWait.until(
-                ExpectedConditions.presenceOfElementLocated(By.cssSelector("button.uHasJ"))
+//                프로필 버튼이 나타날 때 까지 대기
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("button.UtilMenustyle__ProfilePopupButton-sc-2sjysx-4"))
         );
     }
 
