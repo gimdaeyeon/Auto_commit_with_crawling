@@ -24,8 +24,10 @@ services:
 #    env_file:
 #      - .env
     environment:
+      DB_HOST: ${DB_HOST}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
+      MAIL_USERNAME: ${MAIL_USERNAME}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
       PROGRAMMERS_ID: ${PROGRAMMERS_ID}
       PROGRAMMERS_PASSWORD: ${PROGRAMMERS_PASSWORD}
